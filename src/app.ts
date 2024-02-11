@@ -45,6 +45,20 @@ export class App {
       });
     });
 
+    socket.on("sdp", data =>
+      socket.to(data.to).emit("sdp", {
+        description: data.description,
+        sender: data.sender,
+      }),
+    );
+
+    socket.on("ice candidates", data =>
+      socket.to(data.to).emit("ice candidates", {
+        candidate: data.candidate,
+        sender: data.sender,
+      }),
+    );
+
     socket.on('chat', (data) => {
       socket.broadcast.to(data.roomId).emit('chat', {
         message: data.message,
