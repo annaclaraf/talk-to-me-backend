@@ -26,13 +26,30 @@ export class App {
   private socketEvents(socket: Socket) {
     socket.on('subscribe', (data) => {
       socket.join(data.roomId);
+      socket.join(data.socketId);
 
-      socket.on('chat', (data) => {
-        socket.broadcast.to(data.roomId).emit('chat', {
-          message: data.message,
+      const roomsSession = Array.from(socket.rooms);
+
+      if (roomsSession.length > 1) {
+        socket.to(data.roomId).emit("new user", {
+          socketId: socket.id,
           username: data.username,
-          time: data.time,
         });
+      }
+    });
+
+    socket.on("new user connected", data => {
+      socket.to(data.to).emit("new user connected", { 
+        sender: data.sender,
+        username: data.username,
+      });
+    });
+
+    socket.on('chat', (data) => {
+      socket.broadcast.to(data.roomId).emit('chat', {
+        message: data.message,
+        username: data.username,
+        time: data.time,
       });
     });
   }
