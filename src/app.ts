@@ -66,6 +66,10 @@ export class App {
         time: data.time,
       });
     });
+
+    socket.on("disconnect", () => {
+      socket.disconnect()
+    });
   }
 
 }
