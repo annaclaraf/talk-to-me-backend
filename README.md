@@ -12,3 +12,23 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - Node.js
 - Express
 - Socket.IO
+
+## 👩🏻‍💻 Como executar
+
+```bash
+# Clone o repositório
+$ git clone https://github.com/annaclaraf/talk-to-me-backend.git
+
+# Entre na pasta do projeto
+$ cd talk-to-me-backend
+
+# Instale as dependências
+$ npm i
+
+# Execute a aplicação
+$ npm run dev
+```
+
+> [!NOTE]
+>
+> A aplicatição estará disponível em http://localhost:3333/
